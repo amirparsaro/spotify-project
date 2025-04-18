@@ -12,15 +12,20 @@ public class Playlist {
         this.owner = owner;
     }
 
-    public void editTitle(String title, String password) {
+    public void editTitle(String title, String password) throws InvalidOperationException {
         if (!password.equals(this.owner.getPassword())) {
             throw new InvalidOperationException("Incorrect password.");
+        }
+
+        Playlist returnedPlaylist = owner.searchForPlaylist(this.title);
+        if (returnedPlaylist != null) {
+            throw new InvalidOperationException("Playlist already exists with this name.");
         }
 
         this.title = title;
     }
 
-    public void addMusic(Music music, String password) {
+    public void addMusic(Music music, String password) throws InvalidOperationException {
         if (!password.equals(this.owner.getPassword())) {
             throw new InvalidOperationException("Incorrect password.");
         }
@@ -28,7 +33,7 @@ public class Playlist {
         this.playlist.add(music);
     }
 
-    public void removeMusic(Music music, String password) {
+    public void removeMusic(Music music, String password) throws InvalidOperationException {
         if (!password.equals(this.owner.getPassword())) {
             throw new InvalidOperationException("Incorrect password.");
         }
@@ -86,4 +91,8 @@ public class Playlist {
             }
         }
     }
+
+    public String getTitle() {
+        return title;
+    } // removed setTitle because we already have editTitle method
 }

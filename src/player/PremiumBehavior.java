@@ -8,7 +8,7 @@ public class PremiumBehavior implements UserBehavior {
     }
 
     @Override
-    public void createPlaylist(String title, User owner) {
+    public void createPlaylist(String title, User owner) throws InvalidOperationException {
         Playlist playlist = new Playlist(title, owner);
         owner.addToPlaylists(playlist);
     }

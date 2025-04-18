@@ -3,18 +3,13 @@ package player;
 public class RegularBehavior implements UserBehavior {
     private int playingLimit = 5;
 
-    public RegularBehavior() {}
-    public RegularBehavior(int playingLimit) {
-        this.playingLimit = playingLimit;
-    }
-
     @Override
-    public void createPlaylist(String Title, User Owner) {
+    public void createPlaylist(String Title, User Owner) throws InvalidOperationException {
         throw new InvalidOperationException("Regular user Cannot create a playlist.");
     }
 
     @Override
-    public void playMusic(Music music) {
+    public void playMusic(Music music) throws InvalidOperationException {
         if (playingLimit > 0) {
             music.play();
             playingLimit--;
