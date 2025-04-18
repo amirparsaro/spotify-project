@@ -8,12 +8,12 @@ public class User {
     private ArrayList<User> followerList = new ArrayList<>();
     private ArrayList<User> followingList = new ArrayList<>();
     private UserBehavior behavior = new RegularBehavior();
-    protected ArrayList<Playlist> playlists = new ArrayList<>();
+    private ArrayList<Playlist> playlists = new ArrayList<>();
     private static ArrayList<User> allUsers = new ArrayList<>();
 
     public void follow(User user) {
         for (User userInList : followingList) {
-            if (user.username == userInList.username) {
+            if (user.username.equals(userInList.username)) {
                 throw new InvalidOperationException("User with " + user.username +
                         " is already followed by " + this.username + ".");
             }
@@ -35,10 +35,26 @@ public class User {
     }
 
     public UserBehavior getBehavior() {
-        return behavior;
+        return this.behavior;
     }
 
     public void setBehavior(UserBehavior behavior) {
         this.behavior = behavior;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void addToPlaylists(Playlist playlist) { // I needed to do this to make "playlists" private
+        playlists.add(playlist);
     }
 }
