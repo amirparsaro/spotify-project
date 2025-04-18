@@ -11,12 +11,23 @@ public class User {
     private ArrayList<Playlist> playlists = new ArrayList<>();
     private static ArrayList<User> allUsers = new ArrayList<>();
 
-    public User(String username, String password) {
+    public User(String username, String password) throws InvalidOperationException {
+        for (User user : allUsers) {
+            if (user.username.equals(username)) {
+                throw new InvalidOperationException("User already exists with this name.");
+            }
+        }
+
+        if (password.length() < 8) {
+            throw new InvalidOperationException("Password length is less that 8 characters.");
+        }
+
         this.username = username;
         this.password = password;
+        allUsers.add(this);
     }
 
-    public void follow(User user) {
+    public void follow(User user) throws InvalidOperationException {
         for (User userInList : followingList) {
             if (user.username.equals(userInList.username)) {
                 throw new InvalidOperationException("User with " + user.username +
@@ -27,11 +38,11 @@ public class User {
         user.followerList.add(this);
     }
 
-    public void createPlaylist(String title, User owner) {
-        this.behavior.createPlaylist(title, owner);
+    public void createPlaylist(String title) throws InvalidOperationException {
+        this.behavior.createPlaylist(title, this);
     }
 
-    public void playMusic(Music music) {
+    public void playMusic(Music music) throws InvalidOperationException {
         this.behavior.playMusic(music);
     }
 
@@ -59,7 +70,17 @@ public class User {
         return this.password;
     }
 
-    public void addToPlaylists(Playlist playlist) { // I needed to do this to make "playlists" private
+    protected void addToPlaylists(Playlist playlist) throws InvalidOperationException { // I needed to do this to make "playlists" private
+        Playlist returnedPlaylist = null;
+        try {
+            returnedPlaylist = this.searchForPlaylist(playlist.getTitle());
+        } catch (InvalidOperationException e) {
+
+        }
+        if (returnedPlaylist != null) {
+            throw new InvalidOperationException("Playlist already exists with this name.");
+        }
+
         playlists.add(playlist);
     }
 }
