@@ -1,7 +1,6 @@
 package player;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Music {
     private String title;
@@ -12,9 +11,10 @@ public class Music {
     public Music(String title, User singer) {
         this.title = title;
         this.singer = singer;
+        allMusics.add(this);
     }
 
-    public void play() {
+    protected void play() {
         System.out.println("PLaying music " + this.title + "...");
         this.numberOfStream++;
     }
@@ -50,5 +50,13 @@ public class Music {
 
     public User getSinger() {
         return this.singer;
+    }
+
+    public int getNumberOfStream() {
+        return numberOfStream;
+    }
+
+    public void setNumberOfStream(int numberOfStream) {
+        this.numberOfStream = numberOfStream;
     }
 }
