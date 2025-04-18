@@ -11,7 +11,7 @@ public class RegularBehavior implements UserBehavior {
     @Override
     public void playMusic(Music music) {
         if (playingLimit > 0) {
-            Music.play();
+            music.play();
             playingLimit--;
         } else {
             throw new InvalidOperationException("Music playing limit reached for user.");
@@ -20,6 +20,7 @@ public class RegularBehavior implements UserBehavior {
 
     @Override
     public void buyPremium(User owner, int month) {
-        // to do after creating field behavior in User.
+        UserBehavior behavior = new PremiumBehavior();
+        owner.setBehavior(behavior);
     }
 }
