@@ -17,7 +17,11 @@ public class Playlist {
             throw new InvalidOperationException("Incorrect password.");
         }
 
-        Playlist returnedPlaylist = owner.searchForPlaylist(this.title);
+        Playlist returnedPlaylist = null;
+        try {
+            returnedPlaylist = owner.searchForPlaylist(title);
+        } catch (InvalidOperationException e) {}
+
         if (returnedPlaylist != null) {
             throw new InvalidOperationException("Playlist already exists with this name.");
         }
