@@ -83,4 +83,14 @@ public class User {
 
         playlists.add(playlist);
     }
+
+    public Playlist searchForPlaylist(String title) throws InvalidOperationException { // I needed to add this because its the only way you can get a playlist from the playlists list
+        for (Playlist playlist : playlists) {
+            if (title.equals(playlist.getTitle())) {
+                return playlist;
+            }
+        }
+
+        throw new InvalidOperationException("No playlists exist with this name.");
+    }
 }
