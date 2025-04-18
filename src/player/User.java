@@ -11,6 +11,11 @@ public class User {
     private ArrayList<Playlist> playlists = new ArrayList<>();
     private static ArrayList<User> allUsers = new ArrayList<>();
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public void follow(User user) {
         for (User userInList : followingList) {
             if (user.username.equals(userInList.username)) {

@@ -3,6 +3,11 @@ package player;
 public class RegularBehavior implements UserBehavior {
     private int playingLimit = 5;
 
+    public RegularBehavior() {}
+    public RegularBehavior(int playingLimit) {
+        this.playingLimit = playingLimit;
+    }
+
     @Override
     public void createPlaylist(String Title, User Owner) {
         throw new InvalidOperationException("Regular user Cannot create a playlist.");
@@ -20,7 +25,7 @@ public class RegularBehavior implements UserBehavior {
 
     @Override
     public void buyPremium(User owner, int month) {
-        UserBehavior behavior = new PremiumBehavior();
+        UserBehavior behavior = new PremiumBehavior(month);
         owner.setBehavior(behavior);
     }
 }

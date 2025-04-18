@@ -9,6 +9,11 @@ public class Music {
     private int numberOfStream = 0;
     private static ArrayList<Music> allMusics = new ArrayList<>();
 
+    public Music(String title, User singer) {
+        this.title = title;
+        this.singer = singer;
+    }
+
     public void play() {
         System.out.println("PLaying music " + this.title + "...");
         this.numberOfStream++;
