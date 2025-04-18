@@ -3,14 +3,14 @@ package player;
 public class PremiumBehavior implements UserBehavior {
     private int month;
     @Override
-    public void createPlaylist(String Title, User Owner) {
-        Playlist playlist = new Playlist();
-        Owner.playlists.add(playlist);
+    public void createPlaylist(String title, User owner) {
+        Playlist playlist = new Playlist(title, owner);
+        owner.playlists.add(playlist);
     }
 
     @Override
     public void playMusic(Music music) {
-        Music.play(music);
+        music.play();
     }
 
     @Override
