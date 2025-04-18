@@ -9,9 +9,9 @@ public class Music {
     private int numberOfStream = 0;
     private static ArrayList<Music> allMusics = new ArrayList<>();
 
-    public static void play(Music music) {
-        System.out.println("PLaying music " + music.title + "...");
-        music.numberOfStream++;
+    public void play() {
+        System.out.println("PLaying music " + this.title + "...");
+        this.numberOfStream++;
     }
 
     public static ArrayList<Music> search(String title) {
@@ -37,5 +37,13 @@ public class Music {
         }
 
         return null;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public User getSinger() {
+        return this.singer;
     }
 }
